@@ -1,0 +1,31 @@
+package com.example.shoppingcart.model;
+
+import javax.persistence.Id;
+import org.springframework.data.elasticsearch.annotations.RedisHash;
+
+@RedisHash("/cart")
+public class cart {
+
+    @Id
+    private Integer id;
+    private List<Item> Item;
+
+    public cart() {
+
+    }
+    public Cart(Integer id) { this.id = id; }
+
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id) { this.id = id; }
+
+    public List<Item> getItem() {
+        if (Item == null) {
+            Item = new ArrayList<>();
+
+        }
+        return Item;
+    }
+    public void setItem(List<Item> item) {this.Item = Item;}
+}
