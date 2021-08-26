@@ -1,0 +1,22 @@
+package com.example.product.catalog.model;
+
+import javax.persistence.id;
+import org.springframework.data.elasticsearch.annotations.Document;
+
+@Document(indexName = "product", type = "catalog")
+public class Product {
+     @Id
+    private Long id;
+    private String name;
+    private String amount;
+
+    public Product(Long id) {
+        this.id = id;
+    }
+
+    public Product(String name) {
+        this.name = name;
+    }
+
+
+}

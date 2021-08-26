@@ -1,0 +1,31 @@
+package com.example.product.catalog.config;
+
+import org.elasticsearch.client.RestHighLevelClient;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.elasticsearch.config.AbstractElasticsearchConfiguration;
+import org.springframework.data.elasticsearch.core.ElasticsearchEntityMapper;
+import org.springframework.data.elasticsearch.core.EntityMapper;
+import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
+
+@Configuration
+@EnableElasticsearchRepositories(basePackages = "example.product.catalog.repository")
+public class ElasticsearchConfig extends ElasticSearch{
+
+    @Override
+    public RestHighLevelClient elasticsearchClient() {
+        CientConfiguration clientConfiguration =ClientConfiguration.builder()
+                .connectedTo(hostAndPorts "Localhost:9020", "localhost:9030")
+                .build();
+        return RestClients.create(clientConfiguration).rest();
+    }
+    @Bean
+    @Override
+    public EntityMapper entityMapper() {
+        ElasticEntityMapper entityMapper = new ElasticEntityMapper(elasticsearchMappingContext(),
+                new DefaultConversionService());
+        entityMapper.setConfersions(elasticsearchCustomConversions())
+
+                retuens entityMapper;
+    }
+}

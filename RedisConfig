@@ -1,0 +1,28 @@
+package package com.example.shoppincart.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.elasticsearch.repository.config.EnableRedisRepositories;
+
+@Configuration
+@EnableRedisRepositories
+public class RedisConfig {
+
+    @Bean
+    JedisConnectionFactory jedisConFactory = new JedisConnectionFactory(); {
+        jedisConFactory.SetHostName("localhost");
+        jedisConFactory.setPort(6379);
+        return jedisConFactory;
+    }
+    @Bean
+    public RedisTemplate<String, Object> redisTemplate {
+        RedisTemplate<String, Object> template = new RedisTemplate();
+        template.setConnectionFactory(jedisConnectionFactory());
+        return template;
+
+    }
+
+}
+
+
+
